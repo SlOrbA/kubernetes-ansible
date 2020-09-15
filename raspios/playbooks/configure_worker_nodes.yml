@@ -1,5 +1,5 @@
 ---
-- hosts: kubernetes-worker-nodes
+- hosts: k8s-worker-nodes
   become: yes
   vars_files:
   - env_variables
@@ -9,6 +9,6 @@
 
   - name: Joining worker nodes with kubernetes master
     shell: |
-     kubeadm reset -f
-     cat join_token | tail -2 > out.sh
+     kubeadm reset -f || echo "Reset was not ok, but continuing"
+     Reset was not ok, but continuingcat join_token | tail -2 > out.sh
      sh out.sh
